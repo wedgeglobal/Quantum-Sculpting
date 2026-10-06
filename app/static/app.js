@@ -1,4 +1,4 @@
-// Quantum Sculpting 的界面。流程：模型 → 体素化 → 量子处理 → 转回模型。
+// Quantum Sculptor 的界面。流程：模型 → 体素化 → 量子处理 → 转回模型。
 // 本地的步骤（体素化、高斯替身、本地模拟、marching cubes）在控件变化时自动重算；
 // 只有提交给 Atlas 需要点按钮。
 

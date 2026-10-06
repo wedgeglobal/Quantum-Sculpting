@@ -15,7 +15,7 @@ It is laid out as an app with two tabs:
   annotations, saved compositions) and **Output** (frame, image, video, 3D, motion). Columns fold,
   swap sides and resize from their inner edge; the drawer folds and docks under the view or along
   the whole window.
-- **Research** holds the research behind the project, set as an article (a working draft for Peiyan to revise; `src/screens/Research.tsx`).
+- **Research** holds the research behind the project, set as an article (`src/screens/Research.tsx`).
 
 Lab opens on its default layout (Properties · Compose · Presets · Default): readouts down the sides,
 the steps on top, the run underneath; the pieces scale with the room the panels leave. The title in

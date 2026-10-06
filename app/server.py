@@ -1,4 +1,4 @@
-"""Quantum Sculpting 的本地应用：一个只监听 127.0.0.1 的 Flask 服务 + static/ 里的界面。
+"""Quantum Sculptor 的本地应用：一个只监听 127.0.0.1 的 Flask 服务 + static/ 里的界面。
 
 状态都在内存里（单用户原型）：模型 → 体素网格 → 处理后的网格。
 每一步改动会让它后面的结果失效，*_id 计数器让界面能丢掉过期的响应。
@@ -1342,7 +1342,7 @@ def studio_fonts(name):
 
 def main():
     global HOME, ATLAS_BASE, INPUT, GRIDS, OUTPUT
-    p = argparse.ArgumentParser(description="Quantum Sculpting")
+    p = argparse.ArgumentParser(description="Quantum Sculptor")
     p.add_argument("--port", type=int, default=8765)
     p.add_argument("--open", action="store_true", help="启动后打开浏览器")
     p.add_argument("--home", help="存放 API key 的目录（默认 ~/.quantum-sculpting）")
@@ -1359,7 +1359,7 @@ def main():
     for d in (INPUT, GRIDS, OUTPUT):
         d.mkdir(parents=True, exist_ok=True)
     url = f"http://127.0.0.1:{args.port}"
-    print(f"Quantum Sculpting is running at {url}  (Ctrl+C to stop)", flush=True)
+    print(f"Quantum Sculptor is running at {url}  (Ctrl+C to stop)", flush=True)
     if args.open:
         threading.Timer(1.0, webbrowser.open, args=(url,)).start()
     app.run(host="127.0.0.1", port=args.port, threaded=True, debug=False)
