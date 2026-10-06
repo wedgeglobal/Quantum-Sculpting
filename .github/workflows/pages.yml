@@ -1,5 +1,5 @@
 # The website: every push to main builds the interface with the recorded demo (web/demo/, see
-# web/src/demo.ts) and publishes it on GitHub Pages, at https://wedgeglobal.github.io/Quantum-Sculpting/.
+# web/src/demo.ts) and publishes it on GitHub Pages, at https://wedgeglobal.github.io/Quantum-Sculptor/.
 # Needs Settings · Pages · Source: GitHub Actions, once.
 name: Website
 
