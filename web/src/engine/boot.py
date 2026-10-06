@@ -1,6 +1,7 @@
 # The service (app/server.py) running in the visitor's browser, inside Pyodide in a web worker.
 # The browser cannot start threads, so the work the service hands to a thread (an Atlas job, a pool
-# of Atlas bytes) runs right after the request that started it, and its tiles run one after another.
+# of Atlas bytes) runs inside the request that started it, which answers once the job is done; its
+# tiles run one after another. Requests after it wait their turn, so none can overtake the result.
 # Atlas is reached through a small relay (ATLAS_RELAY), since Atlas does not answer web pages directly.
 import concurrent.futures
 import json
@@ -29,15 +30,12 @@ if time.time() - _t0 < 0.015:
             pass
     time.sleep = _sleep
 
-_later = []
-
-
 class _Thread:
     def __init__(self, group=None, target=None, name=None, args=(), kwargs=None, daemon=None):
         self._run = lambda: target(*args, **(kwargs or {}))
 
     def start(self):
-        _later.append(self._run)
+        self._run()
 
     def join(self, timeout=None):
         pass
@@ -88,11 +86,3 @@ def handle(method, path, headers, body):
     data = body.to_bytes() if body is not None else None
     r = _client.open(path, method=method, headers=json.loads(headers), data=data)
     return r.status_code, json.dumps(dict(r.headers)), r.get_data()
-
-
-def run_later():
-    """Work a request started for afterwards (an Atlas job); True if there was any."""
-    did = bool(_later)
-    while _later:
-        _later.pop(0)()
-    return did

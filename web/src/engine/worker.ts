@@ -36,17 +36,6 @@ async function start(relay: string): Promise<Py> {
 }
 
 let ready: Promise<Py> | null = null
-let later = false
-
-/** Work a request started for afterwards (an Atlas job) runs once the answers before it are out. */
-function runLater(py: Py) {
-  if (later) return
-  later = true
-  setTimeout(() => {
-    later = false
-    try { py.globals.get('run_later')() } catch (e) { console.error(e) }
-  }, 0)
-}
 
 onmessage = async (e: MessageEvent) => {
   const m = e.data
@@ -62,7 +51,6 @@ onmessage = async (e: MessageEvent) => {
     out.destroy()
     const copy = body.slice()
     postMessage({ type: 'response', id: m.id, status, headers: JSON.parse(headers), body: copy.buffer }, { transfer: [copy.buffer] })
-    runLater(py)
   } catch (err) {
     postMessage({ type: 'response', id: m.id, status: 500, headers: { 'Content-Type': 'application/json' }, body: new TextEncoder().encode(JSON.stringify({ error: String(err) })).buffer })
   }
