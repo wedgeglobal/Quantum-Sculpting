@@ -5,13 +5,17 @@
   noreply address before the first commit. Never commit as "Claude" or under any other tool
   identity, and do not add `Co-Authored-By:` lines, "Generated with ..." lines or any other tool
   attribution to commit messages or pull request descriptions.
-- **One repo, branches, pull requests.** All work happens in `PeiyanZou02/Quantum-Sculpting`. Start
-  each piece of work on its own branch from the latest `main` (`git fetch origin main && git checkout
-  -b <name>/<topic> origin/main`, e.g. `ray/research-prologue`, `peiyan/qrng-tiles`), commit there, push
-  the branch and open a pull request into `main`. Peiyan decides what is merged. Never push to `main`
-  directly. Before pushing, typecheck and build (`cd web && npx tsc -b && npx vite build`), and if
+- **One repo, branches, pull requests.** All work happens in `wedgeglobal/Quantum-Sculpting` (it moved
+  there from `PeiyanZou02/Quantum-Sculpting` with its whole history; Ray, Peiyan and the team are
+  collaborators). Start each piece of work on its own branch from the latest `main` (`git fetch origin
+  main && git checkout -b <name>/<topic> origin/main`, e.g. `ray/research-prologue`,
+  `peiyan/qrng-tiles`), commit there, push the branch and open a pull request into `main`. Never push to
+  `main` directly. Before pushing, typecheck and build (`cd web && npx tsc -b && npx vite build`), and if
   `main` moved, merge it into the branch first. After a merge, delete the branch.
-  Ray's fork (`madebyrayz/quantum-sculptor`) is no longer used for work.
+  Ray's fork (`madebyrayz/quantum-sculptor`) and Peiyan's repo are no longer used for work.
+- **The website** (<https://wedgeglobal.github.io/Quantum-Sculpting/>) is built from `main` by
+  `.github/workflows/pages.yml`. It plays back runs recorded from the local app (`web/demo/`,
+  `web/src/demo.ts`): open the app with `?record`, go through the runs, commit `web/demo/`.
 - **The Default composition** is the only preset; it is Ray's design and lives in
   `web/src/hud/defaultComposition.json`. Ray publishes a new one from the app (Compose · Saved
   compositions · Publish as Default), which writes that file and raises its `rev`; it goes to `main`

@@ -8,7 +8,7 @@ A local web app prototype: a small Python (Flask) service plus a browser interfa
 
 ## Website
 
-A recorded demo of the app runs on GitHub Pages: <https://peiyanzou02.github.io/Quantum-Sculpting/>.
+A recorded demo of the app runs on GitHub Pages: <https://wedgeglobal.github.io/Quantum-Sculpting/>.
 It has no service behind it; it plays back real runs of the built-in shapes recorded from this app
 (`web/demo/`, see `web/src/demo.ts`). Anything that was not recorded, such as your own model, needs
 the app running locally (below). Every push to `main` rebuilds it (`.github/workflows/pages.yml`).

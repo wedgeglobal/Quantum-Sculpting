@@ -1010,7 +1010,7 @@ export function ResearchPage() {
                 </li>
                 <li>
                   <span className="rs__srcn">Source code</span>
-                  The repository <C>PeiyanZou02/Quantum-Sculpting</C> on GitHub.
+                  The repository <C>wedgeglobal/Quantum-Sculpting</C> on GitHub.
                 </li>
               </ul>
             </section>
