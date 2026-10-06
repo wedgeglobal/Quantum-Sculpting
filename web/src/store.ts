@@ -434,6 +434,12 @@ export const useStore = create<S>()((set, get) => {
           return
         }
         if (job.status === 'done') {
+          // the grid changed after the job finished (a later Voxelise): its result is no longer the one held
+          if (job.meta && job.meta.grid_id !== get().grid?.grid_id) {
+            get().pushLog('The grid changed after the Atlas run; run it again to apply the cached result', 'warn')
+            watching = null
+            return
+          }
           if (job.meta) {
             set({ proc: job.meta })
             clearEvolve()
@@ -717,6 +723,7 @@ export const useStore = create<S>()((set, get) => {
       const t = ticket('proc')
       const signal = opts?.submit ? undefined : flight(PROC)
       let res: Awaited<ReturnType<typeof api.process>>
+      if (IN_BROWSER && opts?.submit) get().pushLog('Running on Atlas: the result comes back when every tile is done, usually within a few minutes')
       try {
         res = await api.process({ ...q, mode, shots: q.shots || null, cached_only: dice ? undefined : opts?.cachedOnly, ...(pool ? { qrng_job: pool } : {}) }, signal)
       } catch (e) {
@@ -729,6 +736,7 @@ export const useStore = create<S>()((set, get) => {
         set({ proc: null, procData: null, resultMesh: null, report: null })
         return
       }
+      if ('job_id' in res && res.status === 'failed') throw new ApiError(0, res.error ?? 'Atlas run failed')
       if ('job_id' in res && res.status === 'running') {
         set({ job: res })
         if (res.kind === 'qrng') {
