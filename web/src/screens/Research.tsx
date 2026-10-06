@@ -1,21 +1,20 @@
 // Research: the research behind the project, set as a journal article. A masthead, the title block, the
-// abstract with its keywords, a prologue, numbered sections with figures and tables, a coda and an appendix,
+// abstract with its keywords, numbered sections with figures and tables, a coda and an appendix,
 // endnotes, works cited, the sources the work is built on, and credits. The contents in the margin follow the reading position.
 // Everything here is plain JSX, figures included, so the text can be revised in place.
 import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react'
 import './research.css'
 
 const SECTIONS = [
-  { id: 'rs-0', n: '', t: 'Prologue: one turn' },
-  { id: 'rs-1', n: 'I', t: 'Which part of chance: measurement in place of the hand' },
-  { id: 'rs-2', n: 'II', t: 'Two losses and a third: from statue to qubits' },
-  { id: 'rs-3', n: 'III', t: 'The nations we carve by' },
-  { id: 'rs-4', n: 'IV', t: 'One history: 5 October 2026' },
-  { id: 'rs-5', n: 'V', t: 'Objection: a coin would do' },
-  { id: 'rs-6', n: 'VI', t: 'Entered, not surveyed' },
-  { id: 'rs-7', n: 'VII', t: 'The operative imaginary' },
-  { id: 'rs-8', n: '', t: 'Coda: the runs we did not print' },
-  { id: 'rs-a', n: 'A', t: 'The Lab' },
+  { id: 'rs-1', n: 'I', t: 'Who decides the cuts' },
+  { id: 'rs-2', n: 'II', t: 'What is lost between the statue and the qubits' },
+  { id: 'rs-3', n: 'III', t: 'Why the regions are nations at war' },
+  { id: 'rs-4', n: 'IV', t: 'The run of 5 October 2026' },
+  { id: 'rs-5', n: 'V', t: 'Would ordinary random numbers make the same sculpture?' },
+  { id: 'rs-6', n: 'VI', t: 'Each run as a latent space' },
+  { id: 'rs-7', n: 'VII', t: 'What the Lab shows, and what it hides' },
+  { id: 'rs-8', n: '', t: 'Coda: the two runs we did not print' },
+  { id: 'rs-a', n: 'A', t: 'Appendix: the Lab' },
 ]
 const BACK = [
   { id: 'rs-notes', t: 'Endnotes' },
@@ -38,21 +37,6 @@ function Back({ n }: { n: number }) {
 /** An identifier in the running text (a device, an engine, a repository), set in the mono. */
 function C({ children }: { children: ReactNode }) {
   return <code className="rs__c">{children}</code>
-}
-
-/** A field still to be filled in from the run's log: shows what goes there. */
-function F({ children }: { children: ReactNode }) {
-  return <span className="rs__f" title="To fill in from the 5 October Evolve log">{children}</span>
-}
-
-/** Something still to be added to a reference (a page, a title, a date). */
-function Todo({ children }: { children: ReactNode }) {
-  return <span className="rs__todo" title="To add">{children}</span>
-}
-
-/** A page number still to be added to a citation. */
-function Pg() {
-  return <Todo>p. —</Todo>
 }
 
 /** Scroll inside the page's own scroller rather than letting the hash move the app. */
@@ -79,11 +63,6 @@ function Fig({ n, kind = 'Fig.', caption, children, wide }: { n: number; kind?: 
       <figcaption className="rs__cap"><span className="rs__capn">{kind} {n}</span><span>{caption}</span></figcaption>
     </figure>
   )
-}
-
-/** An empty frame where an image is still to come. */
-function Slot({ label, ratio = '16 / 9' }: { label: string; ratio?: string }) {
-  return <div className="rs__slot" style={{ aspectRatio: ratio }}><span>{label}</span></div>
 }
 
 // ── figures ────────────────────────────────────────────────────────────
@@ -523,7 +502,7 @@ export function ResearchPage() {
       <div className="rs__page">
         <header className="rs__mast">
           <span>Quantum Sculptor · Research</span>
-          <span>Working paper 01 · 5 October 2026 · draft</span>
+          <span>Working paper 01 · October 2026</span>
         </header>
 
         <div className="rs__grid">
@@ -544,8 +523,13 @@ export function ResearchPage() {
           <article className="rs__col">
             <header className="rs__head">
               <h1 className="rs__t">Handing the carving over to measurement</h1>
-              <p className="rs__sub">How sixty measurements move authorship from the cut to the conditions</p>
+              <p className="rs__sub">Who is the author of a sculpture carved by quantum measurement?</p>
             </header>
+
+            <figure className="rs__lead">
+              <img src={`${import.meta.env.BASE_URL}research/lead.jpg`} alt="A white sculpture, a statue whose body has broken into blocks, walls and outgrowths, standing on a pale floor between the steel cabinets of a quantum computer." />
+              <figcaption className="rs__leadcap">A statue carved by measurement, shown among the racks of a quantum computer. Visualisation.</figcaption>
+            </figure>
 
             <div className="rs__abs">
               <dl className="rs__kw">
@@ -555,168 +539,158 @@ export function ResearchPage() {
               <div>
                 <span className="rs__label">Abstract</span>
                 <p className="rs__p rs__p--abs">
-                  Quantum Sculpting carves an existing 3D model by measurement. We divide the model into twelve nations,
-                  one qubit each, and on each of sixty turns every nation is asked one question whose answer adds or
-                  removes material. We argue that measurement does not take the author out of this process. It moves
-                  authorship from the cut to the conditions: the model, the way it is divided, the metaphor of nations at
-                  war, the rules, and the turn at which we stop. Two consequences follow. Each run is a latent space that
-                  we can enter, by naming it, but never survey; and each print is a counterfactual record of the statue,
-                  a history that never happened to it. We trace the losses the statue goes through on its way to the
-                  print and add a third, measurement, to the two that Antonio Somaini describes. We then take on the
-                  strongest objection, that a pseudo-random generator would make forms nobody could tell apart, and
-                  answer it with the provenance every form carries. We end with a caution about the interface we built
-                  to read these spaces, which promises more overview than a run can give.
+                  Quantum Sculptor is software that reshapes an existing 3D model using the results of quantum
+                  measurements. We take a digital scan of a statue, divide it into twelve regions that we call
+                  nations, and give each nation a qubit, the basic unit of a quantum computer. On each of sixty turns,
+                  every nation is asked one question, and the measured answer decides whether it adds material to the
+                  statue or carves some away. We argue that measurement does not remove the author. It moves the
+                  author’s work earlier, into five decisions made before any measurement: the model, how it is
+                  divided, the metaphor of nations at war, the rules, and the turn at which to stop. Each run is
+                  therefore a space of possible histories, far too large to see in full, and each print records one
+                  history that never happened to the statue but could have. We take up the strongest objection, that
+                  an ordinary computer’s random numbers would make sculptures nobody could tell apart from ours, and
+                  close with a caution about our own software, which makes these spaces look easier to see as a whole
+                  than they are.
                 </p>
               </div>
             </div>
 
             <Sec {...SECTIONS[0]}>
               <p className="rs__p">
-                On turn <F>turn</F> of the run we made on 5 October 2026, nation <F>nation</F> was asked whether it
-                would <F>attack, defend or explore</F>. Before the measurement, its odds of answering yes
-                were <F>odds</F>. The answer was <F>yes or no</F>, and so it <F>action</F>, at the statue’s{' '}
-                <F>where on the body</F>, going from <F>size before</F> voxels to <F>size after</F>.<N n={1} />
+                We argue that measurement moves authorship from the carving to the conditions. A few terms are
+                needed to say what that means. A <b>3D model</b> describes an object’s surface as many small flat
+                triangles; ours began as a scan of a statue. A <b>voxel</b> is a tiny cube, the 3D equivalent of a
+                pixel: filling the space the statue occupies with a grid of voxels turns it into a block of cubes that
+                a program can count and change. A <b>qubit</b> is the basic unit of a quantum computer. An ordinary
+                bit is either 0 or 1; a qubit, until it is <b>measured</b>, holds odds of each, and measuring it
+                gives one definite answer, picked by chance according to those odds.
               </p>
               <p className="rs__p">
-                Nobody picked that answer. We wrote the question, the six things a nation may do and the rule that turns
-                this answer into this movement; the answer itself came out of a quantum state simulated on our machine,
-                sampled with a random number measured on the IBM chip <C>ibm_fez</C>. The statue kept the mark. Sixty
-                turns of marks like it, from twelve nations at first and sixteen by the end, became the 90 mm print
-                described in Section IV, and this paper asks where, in a turn like this one, the author is.
+                Quantum Sculptor turns a 3D model into voxels, divides the voxels into regions called nations, and
+                lets measurement decide what each nation does on every turn: where material is added and where it is
+                carved away. No person makes those decisions. By <b>the conditions</b> we mean the five things we set
+                before any measurement: the model, how it is divided, the metaphor of nations at war, the rules, and
+                the turn at which to stop. The AI researcher Kate Crawford calls such settings “the parameters of the
+                possible” (Crawford, cited in Somaini, 2026). Measurement chooses only within them.
+              </p>
+              <p className="rs__p">
+                Each run is therefore a space of possible histories. We can run any named history, but we can never
+                look at all the possible ones. The print is one of those histories made solid, which makes it a{' '}
+                <b>counterfactual</b> record of the statue: an account of something that did not happen to it but
+                could have, under conditions that can be stated.
+              </p>
+              <p className="rs__p">
+                The media theorist Marshall McLuhan calls every technology an extension of the body that also numbs
+                the part it replaces (McLuhan, 1964, pp. 41–42). Here it is the hand that is replaced: where and how much to
+                carve is now decided by measurement. But measurement is only one of three sources of chance in this
+                work. The other two are rules we wrote, and a quantum state that, for now, we simulate on our own
+                computer instead of running on quantum hardware.
               </p>
             </Sec>
 
             <Sec {...SECTIONS[1]}>
               <p className="rs__p">
-                Quantum Sculpting takes an existing 3D model, cuts it into voxels, divides them into nations and lets
-                measurement decide what each nation does on every turn. The easy reading is that this removes the
-                author: we let go, and the dice carve. We argue the opposite. Measurement does not remove the author. It
-                moves authorship from the cut to the conditions, to what Kate Crawford calls “the parameters of the
-                possible” (quoted in Somaini, <Pg />).
+                Between the statue and the qubits, information is lost at every step. The statue is scanned; the
+                scan, a surface of 500,112 triangles, is voxelised into a grid of 128 × 128 × 128, of which 39,816
+                voxels are solid; regions of that grid are each given a qubit; the qubits are measured; the measured
+                result reshapes the scanned surface; and the surface is printed (Fig. 1).
+              </p>
+              <Fig n={1} wide caption="Quantum Sculptor from start to finish. A model is voxelised, passed through one of four quantum engines, turned back into a printable surface, and composed for display. Evolve (filled) is the engine with nations.">
+                <ProgramFig />
+              </Fig>
+              <p className="rs__p">
+                The film and media theorist Antonio Somaini describes two losses that an image goes through on its way
+                into a generative AI model: one when it is digitised, and another when it is compressed into the long
+                lists of numbers, called vectors, that such models work with (Somaini, 2026). Both happen here. The first
+                is the scan and the grid: each voxel records only how much of it the statue fills, so every detail
+                smaller than a voxel is gone. The second is the step onto qubits. In Evolve, a region of about 3,300
+                voxels is reduced to a single qubit, and all the program knows of that region’s character is three
+                numbers.<N n={1} />
+              </p>
+              <h3 className="rs__h3">The third loss</h3>
+              <p className="rs__p">
+                Measurement is a third loss, and the only step in the chain that also gives something back. A
+                nation starts as a region with voxels of its own: definite, countable, in one place. Once it is
+                represented by a qubit, it holds odds instead of an answer. Its qubit is then <b>entangled</b> with
+                its neighbours’, linked so that their answers are correlated and measuring one says something about
+                the other. The more strongly a nation is linked, the less definite it is on its own: its answers
+                drift towards a coin toss, and only the pair is definite. A quantum computer describes twelve linked
+                qubits with 4,096 numbers, one for every combination of the twelve answers, and none of those numbers
+                belongs to a single nation. Somaini describes the hidden spaces inside AI models as fields of
+                potential forms rather than stores of finished ones (Somaini, 2026); between preparation and
+                measurement, a run is such a field almost literally, a list of numbers transformed by matrices.
               </p>
               <p className="rs__p">
-                A second claim follows from the first. If we set the conditions and measurement chooses within them,
-                then each run is a space of possible histories that we enter by naming and running it, though we can
-                never look over the whole of it. The print is one path through that space made solid, which makes it a
-                counterfactual record of the statue: a history that never happened to it, recorded in the statue’s own
-                surface.
+                Measurement keeps one answer out of those odds and discards the rest. It also makes the nation
+                definite again, since a yes or a no becomes a change of whole voxels; but the nation that comes back
+                has shifted its tendencies, strengthened or broken its links, and moved its border (Fig. 2). A single
+                voxel goes through the same passage in our other engine, the blur. It starts inside or outside the
+                model, becomes a fraction when the model is voxelised, is mixed with its neighbours, and becomes
+                inside or outside again only when the surface is cut at a chosen level, not always on the side where
+                it began.
               </p>
-              <p className="rs__p">
-                McLuhan describes every extension of the body as a self-amputation: a function is cut away from us and
-                handed to a device, and the part that was cut goes numb (McLuhan 1964, ch. 4). Handing the cut to
-                measurement is a self-amputation of this kind. The question is which part of the carving went numb and
-                which part we still hold, and “chance” is too loose a word to answer it, because the chance in this work
-                has three parts: rules that we wrote, random numbers measured on a chip, and a quantum state that is,
-                for now, simulated on our own machine.
-              </p>
-              <p className="rs__p">
-                The argument follows the work: measurement takes the hand out of each cut (II), our rules and their
-                metaphor put it back (III), the choice of when to stop is what remains of it (IV), the objection that
-                any coin would do shows where the work’s authority sits (V), and the interface that promises to show a
-                run whole needs a caution of its own (VI and VII).
-              </p>
+              <Fig n={2} wide caption="Losing and regaining definiteness. A nation, or a single voxel, is first definite, then held as odds, then merged into a state it shares with its neighbours. Measurement, or cutting the surface at a level, makes it definite again, but not as it was.">
+                <AbsorbFig />
+              </Fig>
             </Sec>
 
             <Sec {...SECTIONS[2]}>
               <p className="rs__p">
-                “The ‘content’ of any medium is always another medium,” McLuhan writes (1964, ch. 1). Our chain is long.
-                A statue is scanned; the scan, 500,112 faces, is voxelised into a 128³ grid with 39,816 solid cells;
-                regions of the grid are written onto qubits; the qubits are measured, the measured result pushes the
-                scanned surface, and the surface is printed (Fig. 1). Each link takes the one before it as its content,
-                and each one keeps less of it than it was given.
+                The regions are nations at war because the metaphor decides what measurement can do. The linguist
+                George Lakoff and the philosopher Mark Johnson show that metaphors such as ARGUMENT IS WAR shape what
+                people do, not only what they say: we attack a position, defend a claim, and win or lose a point
+                (Lakoff and Johnson, 1980, p. 4). Evolve takes such a metaphor literally. Following a method by the physicist James Wootton
+                for generating maps with qubits (Wootton, 2020),<N n={2} /> its regions are nations, their voxels are
+                territory, and the only verbs open to them are attack, defend and explore. Whatever the measurements
+                decide, they choose among those verbs.
               </p>
-              <Fig n={1} wide caption="Quantum Sculptor, end to end. A model is voxelised, passed through one of four quantum engines, cut into a printable surface and composed for showing. Evolve (filled) is the engine this paper is about.">
-                <ProgramFig />
-              </Fig>
+              <h3 className="rs__h3">Three tendencies, one question</h3>
               <p className="rs__p">
-                Antonio Somaini describes two losses that an object goes through on its way into a generative model: one
-                when it is digitised, and another when it is compressed into vectors (<Pg />). Both happen here. The
-                first is the scan and the grid: a cell of the grid records only how much of it the model fills, and
-                every detail smaller than a cell is gone. The second is the step onto qubits. In Evolve a region of
-                about 3,300 voxels becomes a single qubit, whose three inclinations are one direction on a
-                sphere.<N n={2} />
+                Each nation is one qubit, and the qubit stores three tendencies: to attack, to defend and to explore.
+                Physicists picture a qubit’s state as an arrow from the centre of a sphere, and the three tendencies
+                are how far that arrow points along three directions (Fig. 3). With only one arrow, a nation that
+                leans fully towards attack has no lean left for the other two. The three questions cannot be asked
+                at once, because in quantum mechanics measuring one disturbs the answers to the other two, so the
+                program asks each nation one question per turn.<N n={3} /> Before the answer is measured, only the
+                chance of a yes is known. It depends on how far the arrow points along the direction asked about, a
+                number b between −1 and 1:
               </p>
-              <h3 className="rs__h3">The third loss</h3>
-              <p className="rs__p">
-                Our work adds a third loss, measurement, and it is a strange one, because it is also the only step in
-                the chain that gives something back. A nation starts as a region with voxels of its own: discrete,
-                countable, in one place. Written onto a qubit, it holds odds instead of an answer. Entangled with a
-                neighbour, it becomes less definite still, its direction shortening and its answers drifting towards a
-                coin toss, until what is definite is the pair. Twelve qubits are held as 4,096 amplitudes, and every one
-                of them is a joint possibility for all twelve nations, so that no entry in the state belongs to one
-                nation alone. Somaini says that latent spaces act as “matrices of potentialities” (<Pg />). Between
-                preparation and measurement a run is one almost literally: a state vector, turned by matrices, holding
-                nothing but potential until it is measured.
-              </p>
-              <p className="rs__p">
-                Measurement keeps one answer out of those odds and throws the rest away. That is the loss. It also
-                returns the nation to discreteness, since a yes or a no becomes a change of whole voxels, though the
-                nation that comes back has moved inclinations, tended or broken ties and a border somewhere new (Fig. 2).
-                The same passage happens to a single cell in the blur, which starts inside or outside the model, becomes
-                a fraction when the model is voxelised, is mixed with its neighbours, and is inside or outside again
-                only when the mesh is cut at a level, not always on the side where it began.
-              </p>
-              <Fig n={2} wide caption="Losing and regaining discreteness. A nation, or a cell, is first definite, then held as odds, then absorbed into a state it shares with its neighbours. Measurement, or the cut at a level, makes it discrete again, but not as it was.">
-                <AbsorbFig />
-              </Fig>
-              <p className="rs__p">
-                In this sense the sculpture is collective. On every turn the twelve nations are, for a moment, one state,
-                and they are separated again only by being asked.
-              </p>
-            </Sec>
-
-            <Sec {...SECTIONS[3]}>
-              <p className="rs__p">
-                Lakoff and Johnson open <span className="rs__ti">Metaphors We Live By</span> with ARGUMENT IS WAR. We attack a position, defend a
-                claim, win or lose a point, and the metaphor shapes what we actually do when we argue (1980, ch. 1).
-                Evolve takes a conceptual metaphor literally. Following James Wootton’s quantum procedure for map
-                generation,<N n={3} /> its regions are nations and their voxels are territory, and the verbs open to them
-                are attack, defend and explore. Whatever the measurements decide, they can only decide among those verbs.
-              </p>
-              <h3 className="rs__h3">Three inclinations, one question</h3>
-              <p className="rs__p">
-                Each nation is one qubit with three inclinations, to attack, to defend and to explore. They are the
-                three axes of one direction on a sphere (Fig. 3), so a nation that leans fully towards attack has no lean
-                left for the other two. The three questions are incompatible measurements: asking one disturbs the
-                answers to the other two, so the program asks each nation one question per turn.<N n={4} /> Before the
-                answer is measured, all that is known is the chance of a yes, set by how far the nation’s direction
-                points along the asked axis:
-              </p>
-              <div className="rs__eq">p(yes) = (1 + b) / 2</div>
-              <Fig n={3} caption="One nation. Its three inclinations are the axes of one direction on a sphere. When it is asked a question, the length of that direction along the asked axis (b) sets the odds of a yes.">
+              <div className="rs__eq">chance of yes = (1 + b) / 2</div>
+              <Fig n={3} caption="One nation. Its three tendencies are the directions of one arrow inside a sphere. When the nation is asked a question, how far the arrow points along that direction (b) sets the chance of a yes.">
                 <SphereFig />
               </Fig>
               <p className="rs__p">
-                Neighbours are entangled, and a closer tie means a stronger gate between their qubits, θ = s · π / 2,
-                where s runs from 0 to 1. Seen alone, a tightly bound nation is less sure of itself: its direction
-                shortens and its odds slide towards a half. Seen as a pair, the two answers agree more often. A nation
-                bound tightly to one neighbour cannot be bound as tightly to another, which is a limit of entanglement
-                itself, and that limit is why each nation tends only one tie at a time. The physics motivates the rule;
-                our code enforces it.<N n={5} />
+                Neighbouring nations are entangled, and the closer two nations are, the stronger the link the program
+                makes between their qubits.<N n={4} /> Looked at alone, a strongly linked nation is less sure of
+                itself: its arrow shortens and its chance of a yes slides towards one half. Looked at as a pair, the
+                two answers agree more often than chance would give. A nation cannot be strongly linked to all its
+                neighbours at once, a limit of entanglement itself, and that limit is why each nation keeps only one
+                strong tie at a time. Physics suggests the rule; our code enforces it.<N n={5} />
               </p>
               <h3 className="rs__h3">Six marks</h3>
               <p className="rs__p">
-                On every turn all nations are prepared, asked, measured and moved together (Fig. 4). The question and
-                the answer together decide what a nation does, and each of the six actions leaves its own mark on the
-                shape (Table 1). Afterwards inclinations and ties shift by rules we wrote: losing territory makes a
-                nation want to attack, gaining it makes it want to defend, and a fight weakens a tie.
+                On every turn, all nations are set up, asked, measured and moved at the same time (Fig. 4). The
+                question and the answer together decide what a nation does, and each of the six possible actions
+                leaves its own kind of mark on the shape (Table 1). Afterwards, tendencies and ties shift by rules we
+                wrote: losing territory makes a nation more inclined to attack, gaining it makes it more inclined to
+                defend, and a fight weakens a tie.
               </p>
-              <Fig n={4} wide caption="One turn, sixty times. Inside the loop only the measurement is not written in advance; every other step is one of our rules. The original surface passes around the whole loop and is pushed by the result at the end.">
+              <Fig n={4} wide caption="One turn, repeated sixty times. Inside the loop, only the measurement is not decided in advance; every other step is one of our rules. The original surface is carried round the loop untouched and is reshaped by the result at the end.">
                 <LoopFig />
               </Fig>
-              <Fig n={1} kind="Table" caption="The six behaviours. Each question has one action for yes and one for no.">
+              <Fig n={1} kind="Table" caption="The six actions. Each question has one action for a yes and one for a no.">
                 <table className="rs__tbl">
                   <thead><tr><th>Asked</th><th>Answers yes</th><th>Answers no</th></tr></thead>
                   <tbody>
                     <tr>
                       <th>Attack</th>
-                      <td><b>Attack.</b> Takes the layer of its least friendly neighbour that touches it. When two nations attack each other, both front lines vanish and a crack opens.<N n={6} /></td>
-                      <td><b>Flee.</b> Breaks contact with that neighbour and moves one voxel outward, until it becomes an island adrift outside.</td>
+                      <td><b>Attack.</b> Takes over the outer layer of its least friendly neighbour where the two touch. When two nations attack each other, both front lines vanish and a crack opens between them.<N n={6} /></td>
+                      <td><b>Flee.</b> Breaks contact with that neighbour and moves one voxel outward, until it becomes an island floating away from the body.</td>
                     </tr>
                     <tr>
                       <th>Defend</th>
-                      <td><b>Fortify.</b> Builds up a layer on its outer surface near the borders.</td>
-                      <td><b>Split.</b> The far half becomes independent, a new nation.</td>
+                      <td><b>Fortify.</b> Builds up a layer on its outer surface near its borders.</td>
+                      <td><b>Split.</b> Its far half breaks away and becomes a new nation.</td>
                     </tr>
                     <tr>
                       <th>Explore</th>
@@ -728,254 +702,256 @@ export function ResearchPage() {
               </Fig>
               <h3 className="rs__h3">We chose war</h3>
               <p className="rs__p">
-                The cracks, walls, horns and islands in our print are marks of the metaphor as much as of measurement.
-                Under a metaphor of GROWTH, a nation could only add material or shed it, and the form would swell and
-                thin without ever cracking along a front. Under CONVERSATION, neighbours would ask and answer each other
-                and trade voxels across a border, which would blur borders where war cuts them. The same chip, the same
-                twelve qubits and the same sixty turns would carve a different statue in each case. Choosing war was our
-                decision, made before any measurement, and it is the largest single decision in the piece.
+                The cracks, walls, horns and islands in our print are marks of the metaphor as much as of
+                measurement (Fig. 7). Under a metaphor of growth, a nation could only add material or shed it, and
+                the form would swell and thin without ever cracking along a front. Under a metaphor of conversation,
+                neighbours would trade voxels across their borders, blurring the borders that war breaks open. The same
+                processor, the same twelve qubits and the same sixty turns would carve a different statue in each
+                case. Choosing war was our decision, made before any measurement, and it is the largest single
+                decision in the piece.
               </p>
             </Sec>
 
-            <Sec {...SECTIONS[4]}>
+            <Sec {...SECTIONS[3]}>
               <p className="rs__p">
-                The piece made on 5 October 2026 started from the scan filed as <C>Aion_Louvre</C>, with the settings in
-                Table 2. Each setting in it was a decision of ours, and the right-hand column says what each one does in
-                the argument.
+                The piece made on 5 October 2026 started from a 3D scan of a Roman statue of Aion, the god of
+                unbounded time, in the Louvre, filed as <C>Aion_Louvre</C>. Table 2 lists every setting of the run,
+                each one a decision of ours.
               </p>
-              <Fig n={2} kind="Table" caption="The settings of this piece, and what each one is in the concept.">
+              <Fig n={2} kind="Table" caption="The settings of the 5 October run, and what each one decides.">
                 <table className="rs__tbl rs__tbl--set">
-                  <thead><tr><th>Step</th><th>Setting</th><th>Value</th><th>In the concept</th></tr></thead>
+                  <thead><tr><th>Step</th><th>Setting</th><th>Value</th><th>What it decides</th></tr></thead>
                   <tbody>
-                    <tr><th rowSpan={2}>Giving the form</th><td>Model</td><td className="rs__v">Aion_Louvre, 500,112 faces</td><td>A scan of a statue: the starting point that is given</td></tr>
-                    <tr><td>Voxel grid</td><td className="rs__v">128³, 39,816 solid cells</td><td>The grain of the material, and the first loss</td></tr>
-                    <tr><th rowSpan={4}>Evolving</th><td>Nations</td><td className="rs__v">12</td><td>12 qubits, 12 superpositions</td></tr>
-                    <tr><td>Turns</td><td className="rs__v">60</td><td>60 rounds of measurement, and where we stop</td></tr>
-                    <tr><td>Reach</td><td className="rs__v">4% of the grid</td><td>How far walls and horns may stand from the original surface</td></tr>
-                    <tr><td>Random numbers</td><td className="rs__v">ibm_fez, 5 s</td><td>A real IBM chip and its processor time: the source of every random choice</td></tr>
+                    <tr><th rowSpan={2}>Giving the form</th><td>Model</td><td className="rs__v">Aion_Louvre, 500,112 triangles</td><td>The given starting point: a scan of a statue</td></tr>
+                    <tr><td>Voxel grid</td><td className="rs__v">128³, 39,816 solid voxels</td><td>The grain of the material, and the first loss</td></tr>
+                    <tr><th rowSpan={4}>Evolving</th><td>Nations</td><td className="rs__v">12</td><td>12 qubits, one per region</td></tr>
+                    <tr><td>Turns</td><td className="rs__v">60</td><td>60 rounds of measurement, and where the history stops</td></tr>
+                    <tr><td>Reach</td><td className="rs__v">4% of the grid</td><td>How far walls and horns may stand out from the original surface</td></tr>
+                    <tr><td>Random numbers</td><td className="rs__v">ibm_fez, 5 s</td><td>A real IBM quantum processor and the time used on it: the source of every random choice</td></tr>
                     <tr><th rowSpan={6}>Joining</th><td>Surface</td><td className="rs__v">quantum field</td><td>Keep the original surface, then let the result push it</td></tr>
-                    <tr><td>Push amount</td><td className="rs__v">6 (range 0–8)</td><td>The dial between the given form and the measured change</td></tr>
-                    <tr><td>Threshold</td><td className="rs__v">0.18</td><td>Which level the surface is drawn to; lower swells, higher erodes</td></tr>
-                    <tr><td>Refinement</td><td className="rs__v">×2, 256³</td><td>How much of the scan’s detail survives the first loss</td></tr>
-                    <tr><td>Finishing</td><td className="rs__v">close 1.5, smooth ×19</td><td>Making the form printable: small gaps closed, the mesh smoothed, all large pieces kept</td></tr>
+                    <tr><td>Push amount</td><td className="rs__v">6 (range 0–8)</td><td>How far the result moves the original surface</td></tr>
+                    <tr><td>Threshold</td><td className="rs__v">0.18</td><td>Where the surface is cut; lower swells the form, higher erodes it</td></tr>
+                    <tr><td>Refinement</td><td className="rs__v">×2, 256³</td><td>How much of the scan’s fine detail survives the first loss</td></tr>
+                    <tr><td>Finishing</td><td className="rs__v">close 1.5, smooth ×19</td><td>Making the form printable: small gaps closed, the surface smoothed, all large pieces kept</td></tr>
                     <tr><td>Print height</td><td className="rs__v">90 mm</td><td>The size of the object</td></tr>
                   </tbody>
                 </table>
               </Fig>
               <p className="rs__p">
-                Over the sixty turns the twelve nations became sixteen through four splits, and all sixteen survived.
-                There were four mutual wars and one flight off the continent, and no annexation or extinction. The solid
-                voxels went from 39,816 to 53,196, with 22,784 grown and 9,404 carved away.
+                Over the sixty turns, the twelve nations became sixteen through four splits, and all sixteen
+                survived. Twice two nations attacked each other at once, opening cracks; one nation fled off the
+                body; none was absorbed by a neighbour or died out. The number of solid voxels went from 39,816 to
+                53,196: 22,784 were added and 9,404 carved away.
               </p>
               <p className="rs__p">
-                The evolved grid is too coarse to print on its own and knows nothing of the scan’s surface, so we kept
-                that surface, took it again on a 256³ grid and let the evolved result push it, outward where nations
-                grew and inward where they were carved. How far it moves is the push amount (Fig. 5). At 0 the scan comes
-                back unchanged; at 8 the form is as close as the joining allows to what the nations made on their own.
-                We stopped at 6. In the 90 mm print the statue is still recognisable, while its body breaks into
-                sections, walls rise along the borders, horns grow from the surface and islands drift away from it
-                (Fig. 6).
+                The evolved grid is too coarse to print on its own and knows nothing of the scan’s fine surface. We
+                therefore kept that surface, rebuilt it on a finer grid of 256 × 256 × 256 voxels, and let the
+                evolved result push it: outward where nations grew, inward where material was carved away. How far
+                it moves is the push amount (Fig. 5). At 0 the scan comes back unchanged; at 8 the form is as close
+                as possible to what the nations made on their own. We chose 6, at which the statue is still
+                recognisable while its body breaks into sections, walls rise along the borders, horns grow from the
+                surface and islands drift away from it (Figs 6 and 7).
               </p>
-              <Fig n={5} wide caption="The push amount, from 0 to 8. At 0 the scan is unchanged; the higher it goes, the closer the form comes to what the nations made on their own. This piece stops at 6.">
+              <Fig n={5} wide caption="The push amount, from 0 to 8. At 0 the scan is unchanged; the higher it goes, the closer the form comes to what the nations made on their own. This piece uses 6.">
                 <DialFig />
               </Fig>
-              <Fig n={6} caption="The printed piece, 90 mm. Image to be added.">
-                <Slot label="Image · the printed piece" ratio="4 / 3" />
+              <Fig n={6} caption="The carved form (left) beside the statue it started from (right). Visualisation.">
+                <img className="rs__img" src={`${import.meta.env.BASE_URL}research/piece.jpg`} alt="Two figures side by side on black: on the right, a classical statue of a lion-headed winged man wrapped by a snake; on the left, a white form of the same height whose body has broken into blocky walls, cracks and outgrowths." />
+              </Fig>
+              <Fig n={7} caption="Detail of the carved surface: walls where nations met, cracks where two attacked each other, and the stepped edges of the voxel grid. Visualisation.">
+                <img className="rs__img" src={`${import.meta.env.BASE_URL}research/detail.jpg`} alt="Close-up of a white carved surface made of stepped blocks, ridges and grooves, lit from the side against black." />
               </Fig>
               <h3 className="rs__h3">Where we stop</h3>
               <p className="rs__p">
-                A history has no end state. Under an earlier set of rules we let one run for 400 turns, and about a
-                hundred voxels were still changing hands on every turn at the end. Sixty is a number we chose, and of
-                all the decisions in Table 2 it is the only one we make after watching what the measurements did. That
-                is what remains of the hand: a decision about when to stop.
+                A history has no natural end. Under an earlier version of the rules we let one run go on for 400
+                turns, and at the end about a hundred voxels were still changing hands on every turn. Sixty turns is
+                the Lab’s default, and we kept it; any other number would have given a different object from the same
+                measurements, since a shorter run is exactly the beginning of a longer one. Stopping is
+                as much a decision as the model or the metaphor, made before the first measurement.
+              </p>
+            </Sec>
+
+            <Sec {...SECTIONS[4]}>
+              <p className="rs__p">
+                A sceptical reader will say that this is a random-number generator with a quantum label. Ordinary
+                computers make random numbers with a formula, a <b>pseudo-random generator</b>, whose output looks
+                random but is fixed entirely by a starting value. Seed one with a number we typed, run the same rules,
+                and the sculptures would be indistinguishable from ours. Our own figures partly agree. Under an
+                earlier version of the rules, nations linked as allies acted together 60% of the time, against 54%
+                when each tossed its own coin;<N n={7} /> the quantum correlations leave a trace in the shape, and
+                the rules leave most of it. Table 3 sets out which parts of a run are measured on quantum hardware,
+                which are simulated on our computer, and which are written by us.
+              </p>
+              <Fig n={3} kind="Table" caption="What the run of 5 October 2026 is made of.">
+                <table className="rs__tbl">
+                  <thead><tr><th>Part of the run</th><th>Where it comes from</th></tr></thead>
+                  <tbody>
+                    <tr><th>Random numbers</th><td><b>Measured</b> on the IBM processor <C>ibm_fez</C>, using 5 s of its time, through Moth’s random-number engine <C>comet-qrng-v1</C> on its Atlas platform<N n={8} /></td></tr>
+                    <tr><th>Division into nations</th><td><b>Measured</b>: voxels grouped by position, starting from those numbers</td></tr>
+                    <tr><th>Question for each nation</th><td><b>Measured</b>: drawn with those numbers, weighted by each nation’s tendencies</td></tr>
+                    <tr><th>Quantum state</th><td><b>Simulated</b> on our computer, one qubit per nation, sixteen at most</td></tr>
+                    <tr><th>Each answer</th><td><b>Both</b>: the odds come from the simulated state, the choice from a measured number</td></tr>
+                    <tr><th>Actions, updates, ties</th><td><b>Written</b>: our rules, Section III</td></tr>
+                    <tr><th>The circuit on a quantum chip</th><td><b>Not yet run</b>: the route exists, as <C>graph-v1</C> on Atlas<N n={9} /></td></tr>
+                    <tr><th>Trace of the correlations</th><td>Allies acting together 60% of the time against 54%, under earlier rules; not yet repeated</td></tr>
+                  </tbody>
+                </table>
+              </Fig>
+              <p className="rs__p">
+                On what the form looks like, then, the objection is right. McLuhan’s claim that “the medium is the
+                message” (McLuhan, 1964, p. 7), that the means by which something arrives matters more than what it
+                carries, points to where the difference lies: in what kind of object the form is. Every decision in
+                our print traces back to a named quantum processor, a measured amount of time on it, and a count of
+                the random bytes that arrived and the bytes that were used. All of it is written into the{' '}
+                <b>provenance</b> record, the documented history of the object, saved beside the printable file.
+              </p>
+              <p className="rs__p">
+                A pseudo-random version would trace back to a number we typed, and its record would say so. Ours
+                traces back to <C>ibm_fez</C>, five seconds of processor time and a count of the bytes used. The
+                record also states the limits: a simulated state, a small trace of correlation and a circuit not yet
+                sent to a chip.
               </p>
             </Sec>
 
             <Sec {...SECTIONS[5]}>
               <p className="rs__p">
-                A sceptical reader will say that this is a random-number generator with a quantum label. Seed an
-                ordinary pseudo-random generator with a number we typed, run the same rules, and the result would be
-                sculptures nobody could tell apart from ours. Our own figures partly concede the point. Under an earlier
-                set of rules, nations bound as allies acted in step 60% of the time, against 54% when each tossed its own
-                coin;<N n={7} /> the quantum correlations leave a trace in the shape, and the rules leave most of it.
-                Table 3 sets out which parts of a run are measured, which are simulated and which are written.
+                Each run works like the latent space of an AI model. In machine learning, a <b>latent space</b> is
+                the internal space in which a model represents what it has learned: each example, an image for
+                instance, is compressed into a short list of numbers and placed as a point in that space, and to
+                generate something new is to move through the space and turn the point one arrives at back into an
+                image. Somaini argues that images today cannot be understood without understanding these spaces (Somaini, 2026).
+                A run has the same parts on a small scale. Voxelising compresses the model; giving each nation a
+                qubit reduces it to a few numbers; and between preparation and measurement there are only odds,
+                spread over every history the rules allow.
               </p>
-              <Fig n={3} kind="Table" caption="What a run of 5 October 2026 is made of.">
-                <table className="rs__tbl">
-                  <thead><tr><th>Part of the run</th><th>Where it comes from</th></tr></thead>
-                  <tbody>
-                    <tr><th>Random numbers</th><td><b>Measured</b> on <C>ibm_fez</C>, 5 s of processor time, through Moth’s <C>comet-qrng-v1</C> on Atlas<N n={8} /></td></tr>
-                    <tr><th>Division into nations</th><td><b>Measured</b>: clustered by position, seeded with those numbers</td></tr>
-                    <tr><th>Question per nation</th><td><b>Measured</b>: drawn with those numbers, weighted by each nation’s inclinations</td></tr>
-                    <tr><th>Quantum state</th><td><b>Simulated</b> on our machine as a state vector, one qubit per nation, sixteen at most</td></tr>
-                    <tr><th>Each answer</th><td><b>Both</b>: odds from the simulated state, sampled with a measured number</td></tr>
-                    <tr><th>Actions, updates, ties</th><td><b>Written</b>: our rules, Section III</td></tr>
-                    <tr><th>The circuit on a chip</th><td><b>Not yet run</b>: the route exists, as <C>graph-v1</C> on Atlas<N n={9} /></td></tr>
-                    <tr><th>Trace of the correlations</th><td>Allies in step 60% against 54%, under earlier rules; not yet repeated</td></tr>
-                  </tbody>
-                </table>
+              <p className="rs__p">
+                That spread is far too large to look at. On each turn, twelve nations can each be asked one of three
+                questions and give one of two answers: 6¹², about 2.2 billion combinations for a single turn, before
+                any split adds a thirteenth nation. Over sixty turns that grows to more than 10⁵⁶⁰ possible histories
+                for one run, a number with 561 digits. A run’s name fixes the starting point of its random choices,
+                so the same name always leads back to the same history.<N n={10} /> We can run any named history, but
+                we can never look at all the possible ones.
+              </p>
+              <p className="rs__p">
+                The media theorist Wolfgang Ernst calls this kind of collection a “latent archive”, made of what he
+                calls “algorithmic objects”: objects “that always come into being anew” instead of existing as fixed
+                data (Ernst, 2013, p. 82). Our runs are kept as names
+                and records; the form itself is not stored anywhere, and comes into being again whenever a name is
+                run. On 5 October we made three runs, and their random numbers were measured on three IBM processors,{' '}
+                <C>ibm_marrakesh</C>, <C>ibm_boston</C> and <C>ibm_fez</C> (Fig. 8).
+              </p>
+              <Fig n={8} wide caption="Three latent spaces from one model. Each run has its own name and its own random numbers, measured on a different processor, and gives a different form. Drawn schematically: the run names are illustrative, while the processors are the ones the runs of 5 October 2026 used.">
+                <RunsFig />
               </Fig>
+              <h3 className="rs__h3">A counterfactual record</h3>
               <p className="rs__p">
-                On the question of what the form looks like, then, the objection is right. McLuhan’s “the medium is the
-                message” (1964, ch. 1) moves the question elsewhere, to what kind of object the form is. Every decision
-                in our print traces back to a named chip, a measured stretch of processor time and a count of the bytes
-                that arrived and the bytes that were used, all of it written into the record that sits beside the
-                exported STL. A pseudo-random version would trace back to a number we typed, and its record would say
-                so.
+                Where analysis asks what happened, Somaini writes, generative models produce “what could have
+                happened, given the conditions that the models have captured and encoded during training”
+                (Somaini, 2026). Our print is an object of this kind. The scan records a statue that exists, and the
+                sixty turns record a history that never happened to it but could have, given its shape, its division
+                into twelve and the six actions open to its parts. The reshaped surface holds both in one skin: its
+                fine detail comes from the scan, its walls and cracks from odds and rules, and nothing on the object
+                marks where one stops and the other begins.
               </p>
               <p className="rs__p">
-                In our W02 piece on Holbein we followed authority as it moves “out of the object and into the
-                instrument.” Here it moves one step further, into the record the instrument leaves. The authority of
-                this sculpture sits in its provenance, which also holds the limits of the claim: a simulated state, a
-                small trace and a circuit not yet sent. Answered this way, the objection stops being a weakness to hide
-                and becomes part of the argument, because the difference between our print and a seeded one is exactly
-                the difference between two records.
+                The three runs could be averaged into one form. The artist Hito Steyerl argues that generative AI
+                makes “mean images”, renderings of a statistical average that belong to no actual case (Steyerl, 2023).
+                An average of our runs would be a form of that kind: no closer to the statue and no more correct than
+                any one of the three, and the product of no history at all. We keep the runs side by side instead,
+                each filed under its name.
               </p>
             </Sec>
 
             <Sec {...SECTIONS[6]}>
               <p className="rs__p">
-                In a machine-learning model, the latent space is what the model makes of its data: each example
-                compressed into far fewer numbers and placed as a point among many dimensions, where to generate is to
-                move through the space and decode where one arrives. Somaini argues that a theory of images now
-                “needs a theory of latent spaces” (<Pg />). A run has the same parts in miniature. Voxelising compresses;
-                writing nations onto qubits vectorises; and between preparation and measurement there are only odds,
-                spread over every history the rules allow.
+                The Lab, the interactive part of Quantum Sculptor, presents runs as if they could be seen as a whole
+                (see the Appendix). It is a 3D workspace in which every run of a session is filed under its name, one
+                timeline scrubs back and forth through a history, and every readout around the object shows the same
+                moment. The media scholar Roland Meyer calls the promise built into such tools, that a user can see and
+                control a whole collection, an “operative imaginary”, made of “the ideas of overview, access, and
+                control” (Meyer, 2025, p. 276). The Lab shows three runs side by side, smoothly, as if they were a fair sample of
+                the space, when they are three paths out of more than 10⁵⁶⁰.
               </p>
               <p className="rs__p">
-                That spread is too large to look over. Each turn offers twelve nations three questions and two answers
-                each, which is 6¹² combinations, about 2.2 billion, before any split adds a thirteenth nation. Sixty
-                turns raise that to more than 10⁵⁶⁰ possible histories for a single run. We can enter such a space by
-                giving it a name, since the name seeds the run and the same name leads back into the same
-                history,<N n={10} /> but we can only follow one path through it at a time.
+                The writer and curator Anthony Downey, discussing the artist Trevor Paglen’s AI-generated series{' '}
+                <span className="rs__ti">Adversarially Evolved Hallucinations</span>, describes how such images invite
+                us to take a machine’s guess for a record of the world, a projection from probabilities, made by a
+                process we cannot inspect (Downey, 2024). Our forms invite the same over-reading, and the word “quantum”
+                adds an authority of its own. A print is one guess under stated conditions.
               </p>
               <p className="rs__p">
-                Wolfgang Ernst’s “latent archive” describes this better than any comparison with retrieval. In such an
-                archive, he writes, “algorithmic objects always come into being anew” (<Pg />). Our runs are kept as
-                names and records, and the form is not stored anywhere; it comes into being again whenever a name is
-                run. On 5 October we entered three such spaces, and their numbers were measured on <C>ibm_marrakesh</C>,{' '}
-                <C>ibm_boston</C> and <C>ibm_fez</C> (Fig. 7).
-              </p>
-              <Fig n={7} wide caption="Three latent spaces from one model. Each run has its own name and its own numbers, measured on a different chip, and gives a different form. Drawn schematically; the run names are illustrative, the chips are those the runs of 5 October 2026 landed on.">
-                <RunsFig />
-              </Fig>
-              <h3 className="rs__h3">A counterfactual record</h3>
-              <p className="rs__p">
-                Where analysis asks what happened, Somaini writes, generative models materialise “what could have
-                happened, given the conditions that the models have captured and encoded during training” (<Pg />). Our
-                print is a form of this kind. The scan records a statue that exists, and the sixty turns record a
-                history that never happened to it but could have, given its shape, its division into twelve and the
-                six verbs open to its parts. The pushed surface holds both in one skin: its fine detail is recovered from
-                the scan, its walls and cracks come from odds and rules, and nothing on the object marks where one
-                stops and the other begins.
-              </p>
-              <p className="rs__p">
-                It would be possible to average the three runs of 5 October into one form. Hito Steyerl calls the
-                images of generative models “mean images”: renderings of an average (Steyerl 2023).
-                An average of our runs would be mean in that sense. It would not be closer to the statue, or more
-                correct than any of the three; it would be a fourth form that no history produced. We keep runs side by
-                side for that reason, each filed under its name, to be compared and returned to.
+                The software works against its own promise by keeping those conditions in view: the odds before every
+                measurement, the engine that produced a result, the processor the random numbers came from and how
+                many were used, and the word “preview” wherever a value is assumed rather than computed. The record
+                saved with every export carries the same list.
               </p>
             </Sec>
 
             <Sec {...SECTIONS[7]}>
               <p className="rs__p">
-                We built the Lab to read these spaces (see the Appendix). It is a 3D space for exploring possible forms:
-                every run in a session is filed under its name, one clock lets us scrub through a history, and every
-                readout around the object shows the same moment. Roland Meyer describes the operative imaginary of such
-                tools as a promise of “unlimited overview, access, and control” (<Pg />). The Lab makes that promise. It
-                shows three runs side by side, smoothly, as if they were a fair sample of the space, when they are three
-                paths out of more than 10⁵⁶⁰.
-              </p>
-              <p className="rs__p">
-                Anthony Downey, writing on Trevor Paglen’s <span className="rs__ti">Adversarially Evolved Hallucinations</span>, describes how
-                images produced by such systems invite us to take a machine’s conjecture for a record of the world, and
-                to accept a projection from probabilities, made by a process we cannot inspect, as the way things are
-                (Downey). Our forms invite the same overreading, and the word “quantum” adds an authority of its own. It
-                is tempting to call a print the statue’s quantum imagination. The print is one conjecture under stated
-                conditions, no more.
-              </p>
-              <p className="rs__p">
-                The interface can work against its own promise only by keeping those conditions in view: the odds before
-                every measurement, the engine that made a result, the chip the numbers came from and how many were used,
-                and the word “preview” wherever a value is assumed instead of computed. The record that travels with
-                every export carries the same list. Read this way, a print shows one of the things the statue could have
-                become, under conditions that can be named.
+                We made three runs on 5 October 2026 and printed the one whose random numbers were measured on{' '}
+                <C>ibm_fez</C>. The runs measured on <C>ibm_marrakesh</C> and <C>ibm_boston</C> are named, so either
+                could be run again, reshaped and printed. Leaving them unprinted was a decision of the same kind as
+                stopping at turn sixty, and the object on the table does not show it.
               </p>
             </Sec>
 
             <Sec {...SECTIONS[8]}>
               <p className="rs__p">
-                We made three runs on 5 October 2026 and printed the one measured on <C>ibm_fez</C>. The runs measured
-                on <C>ibm_marrakesh</C> and <C>ibm_boston</C> are named, so either could be entered again, cut, pushed
-                and printed. Leaving them unprinted was a choice of the same kind as stopping at turn sixty, and it is
-                invisible in the object on the table. A single print cannot show the histories it was chosen from. This
-                paper is partly an attempt to keep them in view.
-              </p>
-            </Sec>
-
-            <Sec {...SECTIONS[9]}>
-              <p className="rs__p">
-                The Lab takes a model through the five steps of Fig. 1, and each step is one of the operations described
-                above. Voxelise compresses a mesh into a grid of 16³ to 256³ cells. The quantum step vectorises it:
-                the Quantum Blur Core writes each axis as the amplitudes of a few qubits, and Evolve writes a region as
-                one qubit’s direction. Measurement samples the space, as counts with a sampling error where shots are
-                taken and as a yes or a no in Evolve. Mesh draws a surface at one level, the cut at which a field becomes
-                an object, and the level sweep shows one field cut at five thresholds so that the cut reads as a choice.
+                The Lab takes a model through the five steps of Fig. 1. <b>Voxelise</b> turns the model’s surface
+                into a grid of 16 to 256 voxels on each side. The <b>quantum</b> step reduces that grid to qubits:
+                the Quantum Blur Core, a method published by the quantum computing company Moth, writes each row of
+                the grid into a few qubits, and Evolve gives each region a single qubit. <b>Measurement</b> samples
+                the result: the blur is run many times and its answers counted, while Evolve takes a single yes or no.{' '}
+                <b>Mesh</b> cuts a printable surface through the result at one chosen level, and a level sweep shows
+                the same result cut at five levels so that the choice of level is visible.
               </p>
               <p className="rs__p">
-                Compose places pieces around the object from a library in seven categories (Fig. 8). Every piece reads
-                the same run, so a readout of the push amount, the chronicle of a history, the register of a probed cell
-                and the frame of the view always agree. Time works the same way: one clock walks through the model, the
-                voxels, the sixty turns at four a second and the mesh, while a cutting plane sweeps across the loop
-                (Fig. 9). Each piece has a motion switch, which decides whether it shows a run as a process or holds one
-                measured moment still. Fig. 10 shows a single turn as the Lab draws it.
+                <b>Compose</b> arranges graphic elements around the object, drawn from a library in seven categories
+                (Fig. 9). Every element reads the same run, so a readout of the push amount, the chronicle of a
+                history and the frame around the view always agree. One clock moves through the model, the voxels,
+                the sixty turns at four a second and the mesh, while a cutting plane sweeps through the object
+                (Fig. 10). Each element either moves with the run or holds one measured moment still. Fig. 11 shows
+                Evolve as the Lab draws it.
               </p>
-              <Fig n={8} wide caption="The compose system. Pieces from seven categories sit around the object, and every one of them reads the same run, so the frame, a readout and a chronicle always show the same moment.">
+              <Fig n={9} wide caption="The compose system. Elements from seven categories sit around the object, and every one of them reads the same run, so the frame, a readout and a chronicle always show the same moment.">
                 <ComposeFig />
               </Fig>
-              <Fig n={9} wide caption="One clock. A pass through the run with the default settings: 4 seconds each for Model, Voxels and Mesh, and sixty turns of Evolve at four a second. Each step grows up through the cutting plane out of the one before it (hatched); in between, the plane sweeps up and down. Each piece is either animated or holding still.">
+              <Fig n={10} wide caption="One clock. A pass through a run with the default settings: 4 seconds each for Model, Voxels and Mesh, and sixty turns of Evolve at four a second. Each step grows up through the cutting plane out of the one before it (hatched); in between, the plane sweeps up and down. Each element is either animated or holding still.">
                 <ClockFig />
               </Fig>
-              <Fig n={10} caption="One turn in the Lab: nations coloured by territory, with the question, the odds and the measured answer for each. Image to be added; ideally the turn told in the Prologue.">
-                <Slot label="Image · a turn in the Lab" />
+              <Fig n={11} caption="Evolve in the Lab, on one of the built-in Calabi-Yau shapes, after sixty turns: each nation in its own colour, with the turn-by-turn chronicle below.">
+                <img className="rs__img" src={`${import.meta.env.BASE_URL}research/lab.jpg`} alt="The Quantum Sculptor Lab: a dark interface with settings on the left, a 3D view in the middle where a rounded form is divided into coloured blocks, one colour per nation, and a log of turns underneath." />
               </Fig>
             </Sec>
-
-            <p className="rs__close">
-              Working paper 01 is a draft of the research behind Quantum Sculptor, written beside the Lab that makes the
-              geometry, composes it and sends it out. Marks in dashed outline are still to be filled in.
-            </p>
 
             <section className="rs__back" id="rs-notes" aria-labelledby="rs-notes-h">
               <h2 className="rs__h rs__h--back" id="rs-notes-h">Endnotes</h2>
               <ol className="rs__notes">
-                <li id="rs-n1">From the turn record of the Evolve log of 5 October 2026, which stores for every nation on every turn the question asked, the odds of a yes before the measurement, the answer, the action and its size in voxels. <Back n={1} /></li>
-                <li id="rs-n2">The Quantum Blur Core vectorises differently: seven qubits hold an axis of 128 cells as 128 amplitudes, and each added qubit doubles the length. On Atlas a large grid is split into tiles of at most 65,536 values, each sent as its own job. <Back n={2} /></li>
-                <li id="rs-n3">Wootton treats the regions of a map as nations with one qubit each. Here the map is a body, and the regions are found by clustering the solid voxels by position. <Back n={3} /></li>
-                <li id="rs-n4">The three inclinations are the X, Y and Z components of one qubit’s direction. Measuring along one axis leaves the other two undetermined, so a nation cannot be asked two questions in the same measurement. To ask, the program turns the asked axis onto the measured one first. b is the component of the qubit’s actual direction along that axis, shorter than the direction it was given whenever it is entangled. <Back n={4} /></li>
+                <li id="rs-n1">The Quantum Blur Core reduces the grid differently: seven qubits hold a row of 128 voxels as 128 numbers, and each added qubit doubles the length. On Atlas a large grid is split into tiles of at most 65,536 values, each sent as its own job. <Back n={1} /></li>
+                <li id="rs-n2">Wootton treats the regions of a map as nations with one qubit each. Here the map is a body, and the regions are found by grouping the solid voxels by position. <Back n={2} /></li>
+                <li id="rs-n3">The three tendencies are the X, Y and Z components of one qubit’s state. Measuring along one axis leaves the other two undetermined, so a nation cannot be asked two questions in the same measurement. To ask a question, the program first turns the asked axis onto the one it measures. b is the component of the qubit’s actual state along that axis, which is shorter than the direction it was given whenever the qubit is entangled. <Back n={3} /></li>
+                <li id="rs-n4">The link is a two-qubit operation, a ZZ rotation, whose angle is θ = s · π / 2, where s, the strength of the tie, runs from 0 to 1. <Back n={4} /></li>
                 <li id="rs-n5">We tested the alternative. When every tie was allowed to tighten at once, the agreement within any one pair was washed out by the others, and nations acted like independent coin tosses. Only a few exclusive ties let allies act together, so we wrote that limit into the rules. <Back n={5} /></li>
-                <li id="rs-n6">A defending neighbour holds against one attacker and gives way to two attacking in the same turn. A neighbour with too little left is annexed whole. Only a nation that has grown past its starting size can split. <Back n={6} /></li>
-                <li id="rs-n7">The rules have changed since that measurement, most of all in how ties are tended. The figures are an indication, not a result for this piece. <Back n={7} /></li>
-                <li id="rs-n8">The bytes that arrived and the bytes used are counted in the record exported beside the STL. <Back n={8} /></li>
-                <li id="rs-n9">The nations’ circuit, a rotation per qubit and a ZZ gate per tie, can be submitted to Atlas as <C>graph-v1</C> as it stands. We have not run it yet. <Back n={9} /></li>
-                <li id="rs-n10">In Evolve the run name seeds the measurements: the same name gives the same history, and a shorter run is exactly the beginning of a longer one. <Back n={10} /></li>
+                <li id="rs-n6">A defending neighbour holds against one attacker and gives way to two attacking in the same turn. A neighbour with too little left is absorbed whole. Only a nation that has grown past its starting size can split. <Back n={6} /></li>
+                <li id="rs-n7">The rules have changed since that measurement, most of all in how ties are kept. The figures are an indication, not a result for this piece. <Back n={7} /></li>
+                <li id="rs-n8">The random bytes that arrived and the bytes used are counted in the record saved beside the printable file. <Back n={8} /></li>
+                <li id="rs-n9">The nations’ circuit, a rotation for each qubit and a ZZ rotation for each tie, can be sent to Atlas as <C>graph-v1</C> as it stands. We have not run it yet. <Back n={9} /></li>
+                <li id="rs-n10">In Evolve the run name sets the starting point of the random choices: the same name gives the same history, and a shorter run is exactly the beginning of a longer one. <Back n={10} /></li>
               </ol>
             </section>
 
             <section className="rs__back" id="rs-cited" aria-labelledby="rs-cited-h">
               <h2 className="rs__h rs__h--back" id="rs-cited-h">Works cited</h2>
               <ul className="rs__cited">
-                <li>Crawford, Kate. Quoted in Somaini, below.</li>
-                <li>Downey, Anthony. “Uncanny Returns: Trevor Paglen and the Hallucinatory Domain of Generative AI.” <span className="rs__ti">The MIT Press Reader</span>. <Todo>date</Todo></li>
-                <li>Ernst, Wolfgang. <Todo>title, publication, year, pages</Todo></li>
-                <li>Lakoff, George, and Mark Johnson. 1980. <span className="rs__ti">Metaphors We Live By</span>. Chicago: University of Chicago Press.</li>
-                <li>McLuhan, Marshall. 1964. <span className="rs__ti">Understanding Media: The Extensions of Man</span>. New York: McGraw-Hill.</li>
-                <li>Meyer, Roland. <Todo>title, publication, year, pages</Todo></li>
-                <li>Somaini, Antonio. <Todo>title</Todo>. <span className="rs__ti">October</span> <Todo>issue, year, pages</Todo></li>
-                <li>Steyerl, Hito. 2023. “Mean Images.” <span className="rs__ti">New Left Review</span> 140/141.</li>
-                <li>Wedge. W02, on Holbein. <Todo>title, year</Todo></li>
-                <li>Wootton, James R. 2020. “A Quantum Procedure for Map Generation.” In <span className="rs__ti">2020 IEEE Conference on Games (CoG)</span>. IEEE.</li>
+                <li>Downey, A. (2024) ‘Uncanny returns: Trevor Paglen and the hallucinatory domain of generative AI’, <span className="rs__ti">The MIT Press Reader</span>, 23 September. Available at: <a href="https://thereader.mitpress.mit.edu/uncanny-returns-trevor-paglen-and-the-hallucinatory-domain-of-generative-ai/">https://thereader.mitpress.mit.edu/uncanny-returns-trevor-paglen-and-the-hallucinatory-domain-of-generative-ai/</a> (Accessed: 6 October 2026).</li>
+                <li>Ernst, W. (2013) ‘Underway to the dual system: classical archives and digital memory’, in Parikka, J. (ed.) <span className="rs__ti">Digital memory and the archive</span>. Minneapolis: University of Minnesota Press, pp. 81–94.</li>
+                <li>Lakoff, G. and Johnson, M. (1980) <span className="rs__ti">Metaphors we live by</span>. Chicago: University of Chicago Press.</li>
+                <li>McLuhan, M. (1964) <span className="rs__ti">Understanding media: the extensions of man</span>. New York: McGraw-Hill.</li>
+                <li>Meyer, R. (2025) ‘Operative image spaces: navigating virtual museum collections’, <span className="rs__ti">Swiss Journal of Sociology</span>, 51(2), pp. 273–289. doi:10.26034/cm.sjs.2025.6926.</li>
+                <li>Somaini, A. (2026) ‘Latent spaces: AI, art, and the archive’, <span className="rs__ti">October</span>, 196, pp. 19–60. doi:10.1162/octo.a.545.</li>
+                <li>Steyerl, H. (2023) ‘Mean images’, <span className="rs__ti">New Left Review</span>, 140/141, pp. 82–97. Available at: <a href="https://newleftreview.org/issues/ii140/articles/hito-steyerl-mean-images">https://newleftreview.org/issues/ii140/articles/hito-steyerl-mean-images</a> (Accessed: 6 October 2026).</li>
+                <li>Wootton, J.R. (2020) ‘A quantum procedure for map generation’, in <span className="rs__ti">2020 IEEE Conference on Games (CoG)</span>. Osaka, 24–27 August. IEEE, pp. 73–80. doi:10.1109/CoG47356.2020.9231571.</li>
               </ul>
             </section>
 
@@ -985,7 +961,7 @@ export function ResearchPage() {
                 <li>
                   <span className="rs__srcn">IBM Quantum</span>
                   Quantum processors <C>ibm_fez</C>, <C>ibm_marrakesh</C> and <C>ibm_boston</C>. The random numbers for the
-                  three runs of 5 October 2026 were measured on them; the piece in Section VI used <C>ibm_fez</C>.
+                  three runs of 5 October 2026 were measured on them; the piece in Section IV used <C>ibm_fez</C>.
                 </li>
                 <li>
                   <span className="rs__srcn">Moth · Atlas</span>
@@ -1019,8 +995,8 @@ export function ResearchPage() {
               <h2 className="rs__h rs__h--back" id="rs-credits-h">Credits</h2>
               <dl className="rs__credits">
                 <dt>Concept and research</dt><dd>Wedge</dd>
-                <dt>Software</dt><dd>A local web app: a Python (Flask) service, and an interface in the browser with a 3D view (three.js)</dd>
-                <dt>Quantum</dt><dd>Random numbers measured on IBM quantum chips and fetched through Moth Atlas (comet-qrng-v1); the individuals’ circuit simulated locally as a state vector; the blur run by the Quantum Blur Core, emulated locally or on Atlas; Entanglement shading from entanglement-shader-v1 tables</dd>
+                <dt>Software</dt><dd>A Python service (Flask) and a browser interface with a 3D view (three.js); on the website the service runs in the browser with Pyodide</dd>
+                <dt>Quantum</dt><dd>Random numbers measured on IBM quantum chips and fetched through Moth Atlas (comet-qrng-v1); the nations’ circuit simulated locally as a state vector; the blur run by the Quantum Blur Core, emulated locally or on Atlas; Entanglement shading from entanglement-shader-v1 tables</dd>
                 <dt>Geometry</dt><dd>Voxelisation, clustering by position, signed distance fields, surface extraction, STL export</dd>
                 <dt>Type</dt><dd>TWK Everett and TWK Everett Mono</dd>
               </dl>
