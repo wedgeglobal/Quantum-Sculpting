@@ -3,15 +3,21 @@
 The full manual for Quantum Sculpting: running it, every step of the pipeline, the Atlas engines it
 uses, and the notes behind the numbers. For an overview, see the [README](../README.md).
 
-## The website demo
+## The website
 
-A recorded demo of the app runs on GitHub Pages: <https://wedgeglobal.github.io/Quantum-Sculpting/>.
-It has no service behind it; it plays back real runs of the built-in shapes recorded from this app
-(`web/demo/`, see `web/src/demo.ts`). Anything that was not recorded, such as your own model, needs
-the app running locally (below). Every push to `main` rebuilds it (`.github/workflows/pages.yml`).
+The website (<https://wedgeglobal.github.io/Quantum-Sculptor/>) is the same app with no server
+behind it. The interface starts a web worker that loads [Pyodide](https://pyodide.org) (Python
+compiled to WebAssembly) with NumPy, SciPy, scikit-image, trimesh and Flask, copies in `app/*.py`
+unchanged, and answers every `/api` request through Flask's test client (`web/src/engine/`). The
+browser cannot start threads, so an Atlas job runs right after the request that submits it, and its
+tiles one after another.
 
-To record more: run the app locally, open it with `?record` in the address
-(<http://127.0.0.1:5109/?record>), go through the runs, then commit `web/demo/`.
+Atlas does not answer web pages directly, so jobs from the website go through a relay on Cloudflare
+Workers (`relay/`), which passes `/api/v1/*` to Atlas with the visitor's key and keeps nothing.
+The key itself lives only in the browser tab.
+
+`pnpm build:site` builds the website into `web/dist`; every push to `main` publishes it
+(`.github/workflows/pages.yml`). `QS_BROWSER=1 pnpm dev` runs the in-browser engine locally.
 
 ## Start on Windows
 
@@ -315,7 +321,8 @@ app/atlas.py        Atlas API client (blur-core-v1, comet-qrng-v1)
 app/server.py       local service (Flask, listens on 127.0.0.1 only)
 app/static/         the original interface (the new one is built into app/static/studio/)
 web/                the Quantum Sculptor interface (React, TypeScript, three.js); see web/README.md
-web/demo/           runs recorded from the app, played back by the website
+web/src/engine/     the website's engine: app/ running in the browser (Pyodide)
+relay/              the relay that lets the browser reach Atlas (Cloudflare Workers)
 tests/              unit tests, API tests, and a fake Atlas server
 docs/design/        the design handoff the interface is built from
 docs/research/      notes with sources (OpenVDB and level sets)

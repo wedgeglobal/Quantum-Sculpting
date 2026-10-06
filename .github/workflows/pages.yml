@@ -1,5 +1,5 @@
 # The website: every push to main builds the interface with the recorded demo (web/demo/, see
-# web/src/demo.ts) and publishes it on GitHub Pages, at https://wedgeglobal.github.io/Quantum-Sculpting/.
+# web/src/demo.ts) and publishes it on GitHub Pages, at https://wedgeglobal.github.io/Quantum-Sculptor/.
 # Needs Settings · Pages · Source: GitHub Actions, once.
 name: Website
 
@@ -36,6 +36,8 @@ jobs:
         working-directory: web
         env:
           QS_BASE: /${{ github.event.repository.name }}/
+          # the Atlas relay (relay/), deployed on Cloudflare Workers
+          VITE_ATLAS_RELAY: https://quantum-sculptor-atlas.bold-hat-0047.workers.dev/api/v1
       - uses: actions/upload-pages-artifact@v3
         with:
           path: web/dist
