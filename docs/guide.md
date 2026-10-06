@@ -1,6 +1,6 @@
 # Guide
 
-The full manual for Quantum Sculpting: running it, every step of the pipeline, the Atlas engines it
+The full manual for Quantum Sculptor: running it, every step of the pipeline, the Atlas engines it
 uses, and the notes behind the numbers. For an overview, see the [README](../README.md).
 
 ## The website

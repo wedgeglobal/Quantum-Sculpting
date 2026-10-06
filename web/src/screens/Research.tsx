@@ -502,7 +502,7 @@ export function ResearchPage() {
       <div className="rs__page">
         <header className="rs__mast">
           <span>Quantum Sculptor · Research</span>
-          <span>Working paper 01 · October 2026</span>
+          <span>October 2026</span>
         </header>
 
         <div className="rs__grid">
@@ -994,7 +994,7 @@ export function ResearchPage() {
             <section className="rs__back" id="rs-credits" aria-labelledby="rs-credits-h">
               <h2 className="rs__h rs__h--back" id="rs-credits-h">Credits</h2>
               <dl className="rs__credits">
-                <dt>Concept and research</dt><dd>Wedge</dd>
+                <dt>Concept and research</dt><dd>Wedge (Peiyan Zou, Ray Zhang)</dd>
                 <dt>Software</dt><dd>A Python service (Flask) and a browser interface with a 3D view (three.js); on the website the service runs in the browser with Pyodide</dd>
                 <dt>Quantum</dt><dd>Random numbers measured on IBM quantum chips and fetched through Moth Atlas (comet-qrng-v1); the nations’ circuit simulated locally as a state vector; the blur run by the Quantum Blur Core, emulated locally or on Atlas; Entanglement shading from entanglement-shader-v1 tables</dd>
                 <dt>Geometry</dt><dd>Voxelisation, clustering by position, signed distance fields, surface extraction, STL export</dd>

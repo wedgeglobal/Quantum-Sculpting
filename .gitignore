@@ -1,14 +1,15 @@
-# 数据目录：用户模型、Atlas 结果缓存、导出文件都不进仓库，只保留空目录
-input/*
-!input/.gitkeep
-grids/*
-!grids/.gitkeep
-output/*
-!output/.gitkeep
+# Data the app makes as it runs: your models, cached Atlas results, exported files
+input/
+grids/
+output/
 
-# TWK Everett 是商业授权字体，不能随仓库分发
+# TWK Everett is commercially licensed and is not distributed with the code
 app/static/fonts/*.otf
 !app/static/fonts/README.md
+web/public/fonts/*.ttf
+web/public/fonts/*.otf
+web/public/fonts/*.woff2
+web/public/fonts/*.woff
 
 # Python
 __pycache__/
@@ -16,23 +17,18 @@ __pycache__/
 .venv/
 venv/
 
-# 本地配置与密钥
+# Local settings and keys
 .env
 config.json
 
-# 工具与系统文件
+# Builds and dependencies
+web/node_modules/
+web/dist/
+app/static/studio/
+
+# Tools and system files
 .claude/*
 !.claude/settings.json
 Thumbs.db
 .DS_Store
-
-# 交接记录只留在本地和 OneDrive：里面有指向私有 Claude 文档的链接
 PROGRESS.md
-
-# Quantum Sculptor web front end (web/)
-web/node_modules/
-web/public/fonts/*.ttf
-web/public/fonts/*.otf
-app/static/studio/
-web/public/fonts/*.woff2
-web/public/fonts/*.woff

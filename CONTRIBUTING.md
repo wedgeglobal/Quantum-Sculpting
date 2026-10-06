@@ -1,6 +1,6 @@
 # Contributing
 
-Quantum Sculpting is developed by Peiyan Zou and Ray Zhang at Wedge. Work goes through branches and
+Quantum Sculptor is developed by Peiyan Zou and Ray Zhang at Wedge. Work goes through branches and
 pull requests; `main` is protected and Wedge (`@wedgeglobal`) reviews and merges every change.
 
 1. **Branch from the latest `main`**, named after you and the work:
@@ -22,8 +22,8 @@ pull requests; `main` is protected and Wedge (`@wedgeglobal`) reviews and merges
 
    If `main` moved in the meantime, merge it into your branch first.
 
-4. **Push and open a pull request** into `main`. Wedge reviews it and merges it; the branch is deleted
-   after the merge. Every merge to `main` republishes the [website](https://wedgeglobal.github.io/Quantum-Sculptor/).
+4. **Push and open a pull request** into `main`. Wedge reviews it and squash-merges it, so it lands as one
+   commit under your name; the branch is deleted after the merge. Every merge to `main` republishes the [website](https://wedgeglobal.github.io/Quantum-Sculptor/).
 
 The [guide](docs/guide.md) explains how the app is put together, and [web/README.md](web/README.md)
 the interface.
